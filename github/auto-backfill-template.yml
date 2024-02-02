@@ -6,6 +6,14 @@ on:
       source_branch:
         required: true
         type: string
+      master_branch:
+        required: true
+        type: string
+        default: master
+      develop_branch:
+        required: true
+        type: string
+        default: idt-develop
 jobs:
   update_pull_request:
     runs-on: ubuntu-latest
