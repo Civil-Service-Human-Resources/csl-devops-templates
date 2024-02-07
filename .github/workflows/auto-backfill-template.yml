@@ -20,7 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Create pull requests
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SOURCE: ${{ inputs.source_branch }}
         run: |
           gh_pr_up() { gh pr create $* || gh pr edit $* }
-          gh_pr_up --base master --head ${{ inputs.source_branch }} --title "${{ inputs.source_branch }} master backfill" --body "Auto-generated ${{ inputs.source_branch }} to master backfill" --label "backfill" --assignee "Civil-Service-Human-Resources/lpg"
-          gh_pr_up --base idt-develop --head ${{ inputs.source_branch }} --title "${{ inputs.source_branch }} develop backfill" --body "Auto-generated ${{ inputs.source_branch }} to develop backfill" --label "backfill" --assignee "Civil-Service-Human-Resources/lpg"
+          gh_pr_up --base master --head $SOURCE --title "$SOURCE master backfill" --body "Auto-generated $SOURCE to master backfill" --label "backfill" --assignee "Civil-Service-Human-Resources/lpg"
+          gh_pr_up --base idt-develop --head $SOURCE --title "$SOURCE develop backfill" --body "Auto-generated $SOURCE to develop backfill" --label "backfill" --assignee "Civil-Service-Human-Resources/lpg"
