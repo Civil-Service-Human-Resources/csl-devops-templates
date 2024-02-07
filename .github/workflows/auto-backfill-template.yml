@@ -34,13 +34,13 @@ jobs:
           pr_update_method: 'merge'
 
       - name: Create or Update Pull Request
-              uses: repo-sync/pull-request@v2
-              with:
-                destination_branch: 'idt-develop'
-                source_branch: ${{ inputs.source_branch }}
-                github_token: ${{ secrets.GITHUB_TOKEN }}
-                pr_title: '${{ inputs.source_branch }} idt-develop backfill'
-                pr_body: 'Auto-generated ${{ inputs.source_branch }} to idt-develop backfill'
-                pr_label: 'backfill'
-                pr_draft: false
-                pr_update_method: 'merge'
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: 'idt-develop'
+          source_branch: ${{ inputs.source_branch }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: '${{ inputs.source_branch }} idt-develop backfill'
+          pr_body: 'Auto-generated ${{ inputs.source_branch }} to idt-develop backfill'
+          pr_label: 'backfill'
+          pr_draft: false
+          pr_update_method: 'merge'
