@@ -7,11 +7,11 @@ on:
         required: true
         type: string
       master_branch:
-        required: true
+        required: false
         type: string
         default: master
       develop_branch:
-        required: true
+        required: false
         type: string
         default: idt-develop
 jobs:
