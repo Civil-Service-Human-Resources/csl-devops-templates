@@ -20,27 +20,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Create master backfill pull request
-        uses: repo-sync/pull-request@v2
-        with:
-          destination_branch: 'master'
-          source_branch: ${{ inputs.source_branch }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: '${{ inputs.source_branch }} master backfill'
-          pr_body: 'Auto-generated ${{ inputs.source_branch }} to master backfill'
-          pr_label: 'backfill'
-          pr_draft: false
-          pr_update_method: 'merge'
-
-      - name: Create or Update Pull Request
-        uses: repo-sync/pull-request@v2
-        with:
-          destination_branch: 'idt-develop'
-          source_branch: ${{ inputs.source_branch }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_title: '${{ inputs.source_branch }} idt-develop backfill'
-          pr_body: 'Auto-generated ${{ inputs.source_branch }} to idt-develop backfill'
-          pr_label: 'backfill'
-          pr_draft: false
-          pr_update_method: 'merge'
+        run: |
+          gh_pr_up() { gh pr create $* || gh pr edit $* }
+          gh_pr_up --base master --head ${{ inputs.source_branch }} --title "${{ inputs.source_branch }} master backfill" --body "Auto-generated ${{ inputs.source_branch }} to master backfill" --label "backfill" --assignee "Civil-Service-Human-Resources/lpg"
+          gh_pr_up --base idt-develop --head ${{ inputs.source_branch }} --title "${{ inputs.source_branch }} develop backfill" --body "Auto-generated ${{ inputs.source_branch }} to develop backfill" --label "backfill" --assignee "Civil-Service-Human-Resources/lpg"
