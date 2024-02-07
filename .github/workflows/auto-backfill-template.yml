@@ -19,10 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Create pull requests
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SOURCE: ${{ inputs.source_branch }}
+      - name: Create master backfill
         run: |
           gh pr create --base master --head $SOURCE --title "$SOURCE master backfill" --body "Auto-generated $SOURCE to master backfill" --label "backfill" --reviewer lpg
+      - name: Create develop backfill
+        run: |
           gh pr create --base idt-develop --head $SOURCE --title "$SOURCE develop backfill" --body "Auto-generated $SOURCE to develop backfill" --label "backfill" --reviewer lpg
