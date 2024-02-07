@@ -18,8 +18,8 @@ jobs:
   update_pull_request:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - name: Create pull requests
         run: |
           gh_pr_up() { gh pr create $* || gh pr edit $* }
           gh_pr_up --base master --head ${{ inputs.source_branch }} --title "${{ inputs.source_branch }} master backfill" --body "Auto-generated ${{ inputs.source_branch }} to master backfill" --label "backfill" --assignee "Civil-Service-Human-Resources/lpg"
