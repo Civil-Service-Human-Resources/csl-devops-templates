@@ -16,7 +16,7 @@ on:
         default: idt-develop
 jobs:
   update_pull_request:
-    if: ${{ startswith(source_branch, 'idt-release-v') || startswith(source_branch, 'idt-hotfix-v') }}
+    if: ${{ startswith(inputs.source_branch, 'idt-release-v') || startswith(inputs.source_branch, 'idt-hotfix-v') }}
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
